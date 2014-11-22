@@ -11,7 +11,15 @@
 
 <template name="showPrices">
   <h3>Showing prices, ma loooord...</h3>
-  {{#if currentPrice }}
-  <h3>{{ currentPrice }}</h3>
-  {{/if }}
+  {{#each priceData }}
+  <h3>{{ this.price }}</h3>
+  <h3>{{ this.coin }}</h3>
+  <h3>{{ this.time }}</h3>
+  {{/each }}
+
+  {{#with time }}
+  <h3>{{ this }}</h3>
+  
+  {{/with }}
+  
 </template>
