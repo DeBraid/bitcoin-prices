@@ -1,0 +1,17 @@
+<head>
+  <title>Bitcoin Prices</title>
+</head>
+
+<body>
+  <h1>Price API</h1>
+  
+  {{> showPrices }}
+  
+</body>
+
+<template name="showPrices">
+  <h3>Showing prices, ma loooord...</h3>
+  {{#if currentPrice }}
+  <h3>{{ currentPrice }}</h3>
+  {{/if }}
+</template>
