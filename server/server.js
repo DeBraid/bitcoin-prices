@@ -16,5 +16,13 @@ Meteor.methods({
   getBTCCADPrice: function () {
     var result = Meteor.http.call("GET", "http://api.bravenewcoin.com/ticker/bnc_ticker_btc_cad.json");
     return result.data;
-  }  
+  }
 });
+
+Meteor.methods({
+  getChinaData: function () {
+    var result = Meteor.http.call("GET", "http://api.bravenewcoin.com/ticker/bnc_ticker_btc_cny_24hr.json");
+    return result.data;
+  }
+});
+

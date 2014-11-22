@@ -3,32 +3,47 @@
 </head>
 
 <body>
-  <h1>Price API</h1>
-  
-  {{> showPrices }}
-  {{> canada }}
+  <div class="container">
+    <div class="row">
+      <h1>Price API</h1>
+    </div>
 
-  
+    <div class="row">
+      <div class="col-sm-4">
+        {{> showPrices }}
+      </div>
+      <div class="col-sm-4">
+        {{> canada }}
+      </div>
+      <div class="col-sm-4">
+        {{> china }}
+      </div>
+    </div>
+
+  </div>
 </body>
 
 <template name="showPrices">
   <h3>Showing prices, ma loooord...</h3>
   {{#each priceData }}
-    <h3>{{ price }}</h3>
-    <h3>{{ coin }}</h3>
-    <h3>{{ time }}</h3>
+    <p>Current {{ coin }} price in USD: ${{ price }}</p>
+    <p>As of {{ time }}</p>
   {{/each }}
-
 </template>
 
 
 <template name="canada">
   <h3>O Canada </h3>
   {{#each CAD24 }}
-    <h3>{{ price }}</h3>
-    <h3>{{ coin }}</h3>
-    <h3>{{ currency }}</h3>
-    <h3>{{ time }}</h3>
+    <p>Current {{ coin }} price is: {{ currency }}$ {{ price }}</p>
+    <p>As of {{ time }}</p>
   {{/each }}
+</template>
 
+<template name="china">
+  <h3>China </h3>
+  {{#each CNY24 }}
+    <p>Current {{ coin }} price is: {{ currency }}$ {{ price }}</p>
+    <p>As of {{ time }}</p>
+  {{/each }}
 </template>
