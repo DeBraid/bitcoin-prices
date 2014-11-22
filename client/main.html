@@ -6,6 +6,8 @@
   <h1>Price API</h1>
   
   {{> showPrices }}
+  {{> canada }}
+
   
 </body>
 
@@ -14,6 +16,18 @@
   {{#each priceData }}
     <h3>{{ price }}</h3>
     <h3>{{ coin }}</h3>
+    <h3>{{ time }}</h3>
+  {{/each }}
+
+</template>
+
+
+<template name="canada">
+  <h3>O Canada </h3>
+  {{#each CAD24 }}
+    <h3>{{ price }}</h3>
+    <h3>{{ coin }}</h3>
+    <h3>{{ currency }}</h3>
     <h3>{{ time }}</h3>
   {{/each }}
 
