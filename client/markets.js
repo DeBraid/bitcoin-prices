@@ -15,6 +15,6 @@ Template.markets.helpers({
         return data.push(quote);
       };
     });
-    return data;
+    return data.reverse();
   }
 }); 
