@@ -1,7 +1,7 @@
 Meteor.methods({
   getWeighted: function () {
     var result = Meteor.http.call("GET", "http://api.bitcoincharts.com/v1/weighted_prices.json");
-    return result.content;
+    return JSON.parse(result.content);
   }  
 });
 

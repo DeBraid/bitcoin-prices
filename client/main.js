@@ -33,11 +33,12 @@ Meteor.call("getCAD24Price", function(error, result) {
 Meteor.call("getChinaData", function(error, result) {
   if (error)
       console.log(error)
-  var _this = result;
+  var _this = result,
+  date = new Date(_this.time_stamp * 1000);
 
   var data = [
     {
-      time : _this.time_stamp,
+      time : date,
       coin : _this.coin_name,
       currency : _this.ticker_currency,
       price : _this.last_price

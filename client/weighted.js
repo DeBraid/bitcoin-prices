@@ -1,14 +1,19 @@
 Meteor.call("getWeighted", function(error, result) {
   if (error)
       console.log(error)
-  console.log("weighted result client:", result);
-
   return Session.set("weightedPrices", result);
-
 });
 
 Template.weighted.helpers({
   weightedPrices: function () {
-    return Session.get("weightedPrices");
+    var foo = Session.get("weightedPrices");
+    console.log(foo);
+    _.each(foo, function (d,i) {
+      console.log("d",d);
+    })
   }
 }); 
+
+// Template.weighted.USD = function () {
+//   return JSON.parse(this.USD).USD;
+// }
