@@ -4,13 +4,6 @@ Meteor.call("getWeighted", function(error, result) {
   return Session.set("weightedPrices", result);
 });
 
-Meteor.call("getMarkets", function(error, result) {
-  if (error)
-      console.log(error)
-  return Session.set("marketPrices", result);
-});
-
-
 Template.weighted.helpers({
   weightedPrices: function () {
     var quotes = Session.get("weightedPrices"),
@@ -29,9 +22,3 @@ Template.weighted.helpers({
     return data;
   }
 });
-
-Template.markets.helpers({
-  allMarkets: function () {
-    return Session.get("marketPrices");
-  }
-}); 

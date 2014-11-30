@@ -49,6 +49,3 @@ Meteor.methods({
     return result.data;
   }
 });
-
-
-

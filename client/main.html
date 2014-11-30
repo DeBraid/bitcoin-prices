@@ -16,6 +16,10 @@
     </div>
 
     <div class="row">
+      {{> markets }}
+    </div>
+
+    <div class="row">
       {{> weighted }}
     </div>
 
@@ -54,6 +58,6 @@
 </template>
 
 <template name="priceDisplay">
-      <p>Current {{ coin }} price is: {{ currency }}$ {{ price }}</p>
-      <p>As of {{ time }}</p>
+  <p>Current {{ coin }} price is: {{ currency }}$ {{ price }}</p>
+  <p>As of {{ time }}</p>
 </template>
