@@ -6,6 +6,15 @@ Meteor.call("getMarkets", function(error, result) {
 
 Template.markets.helpers({
   allMarkets: function () {
-    return Session.get("marketPrices");
+    var quotes = Session.get("marketPrices"),
+        data = [];
+
+    _.sortBy(quotes, function ( quote, i )  {
+      var vol = quote.volume;
+      if ( vol > 1 ) {
+        return data.push(quote);
+      };
+    });
+    return data;
   }
 }); 
