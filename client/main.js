@@ -46,6 +46,22 @@ Meteor.call("getChinaData", function(error, result) {
   return Session.set("CNY24", data);
 });
 
+Meteor.call("getIndia", function(error, result) {
+  if (error)
+      console.log(error)
+  var _this = result;
+
+  var data = [
+    {
+      time : _this.time_stamp,
+      coin : _this.coin_name,
+      currency : _this.ticker_currency,
+      price : _this.last_price
+    }
+  ];
+  return Session.set("INR24", data);
+});
+
 
 Meteor.call("getBTCCADPrice", function(error, result) {
   if (error)
@@ -84,6 +100,9 @@ Template.global.helpers({
   },
   CNY24: function () {
     return Session.get("CNY24");
+  },
+  INR24: function () {
+    return Session.get("INR24");
   }
 }); 
 
