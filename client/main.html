@@ -12,12 +12,11 @@
       <div class="col-sm-4">
         {{> showPrices }}
       </div>
-      <div class="col-sm-4">
-        {{> canada }}
-      </div>
-      <div class="col-sm-4">
-        {{> china }}
-      </div>
+      {{> global }}
+    </div>
+
+    <div class="row">
+      {{> weighted }}
     </div>
 
   </div>
@@ -31,19 +30,23 @@
   {{/each }}
 </template>
 
+<template name="global">
+  <div class="col-sm-4">
+    <h3>O Canada </h3>
+    {{#each CAD24 }}
+      {{> priceDisplay}}
+    {{/each }}
+  </div>
 
-<template name="canada">
-  <h3>O Canada </h3>
-  {{#each CAD24 }}
-    <p>Current {{ coin }} price is: {{ currency }}$ {{ price }}</p>
-    <p>As of {{ time }}</p>
-  {{/each }}
+  <div class="col-sm-4">
+    <h3>China </h3>
+    {{#each CNY24 }}
+      {{> priceDisplay}}
+    {{/each }}
+  </div>
 </template>
 
-<template name="china">
-  <h3>China </h3>
-  {{#each CNY24 }}
-    <p>Current {{ coin }} price is: {{ currency }}$ {{ price }}</p>
-    <p>As of {{ time }}</p>
-  {{/each }}
+<template name="priceDisplay">
+      <p>Current {{ coin }} price is: {{ currency }}$ {{ price }}</p>
+      <p>As of {{ time }}</p>
 </template>

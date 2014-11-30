@@ -53,27 +53,7 @@ Meteor.call("getBTCCADPrice", function(error, result) {
   var getBTCCADPrice = result;
 });
 
-// Meteor.call("getChinaData", function(error, result) {
-//   if (error)
-//       console.log(error)
-//   var _this = result;
-//   console.log(_this);
-
-//   var china = [
-//     {
-//       time : _this.time_stamp,
-//       coin : _this.coin_name,
-//       currency : _this.ticker_currency,
-//       price : _this.last_price
-//     }
-//   ];
-//   console.log(china);
-//   return Session.set("chinaData", china);
-
-// });
-
-
-// var ticks = [];
+var ticks = [];
 
 Meteor.call("getPrice", function(error, result) {
   if (error)
@@ -98,16 +78,12 @@ Template.showPrices.helpers({
   }
 }); 
 
-Template.canada.helpers({
+Template.global.helpers({
   CAD24: function () {
     return Session.get("CAD24");
-  }
-}); 
-
-Template.china.helpers({
+  },
   CNY24: function () {
     return Session.get("CNY24");
   }
 }); 
-
 

@@ -1,4 +1,11 @@
 Meteor.methods({
+  getWeighted: function () {
+    var result = Meteor.http.call("GET", "http://api.bitcoincharts.com/v1/weighted_prices.json");
+    return result.content;
+  }  
+});
+
+Meteor.methods({
   getPrice: function () {
     var result = Meteor.http.call("GET", "http://api.bravenewcoin.com/ticker/bnc_ticker_btc.json");
     return result.data;
