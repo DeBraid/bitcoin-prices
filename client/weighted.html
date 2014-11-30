@@ -1,7 +1,12 @@
 <template name="weighted">
   <h1>Weighted Prices</h1>  
   <h3>bitcoin charts api</h3>
-  {{#with weightedPrices }}
-    <h4>{{ USD }}</h4>
-  {{/with }}
+  {{#each weightedPrices }}
+    <h4>{{ curr }}</h4>
+    <p>{{ seven }}</p>
+    <p>{{ thirty }}</p>
+    <p>{{ sixty }}</p>
+  {{/each }}
+
+
 </template>

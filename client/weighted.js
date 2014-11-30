@@ -8,9 +8,20 @@ Template.weighted.helpers({
   weightedPrices: function () {
     var foo = Session.get("weightedPrices");
     console.log(foo);
-    _.each(foo, function (d,i) {
-      console.log("d",d);
+    var data = [];
+
+    _.each(foo, function (quote, ticker) {
+  
+    data.push({
+      curr : ticker,
+      seven:  quote["7d"] , 
+      thirty: quote["30d"] , 
+      sixty:  quote["24h"], 
+    });
+
     })
+    console.log(data);
+    return data;
   }
 }); 
 
