@@ -1,4 +1,5 @@
 <template name="weighted">
+  {{> markets }}
   <h1>Weighted Prices</h1>  
   <h3>bitcoin charts api</h3>
   {{#each weightedPrices }}
@@ -8,5 +9,25 @@
     <p>{{ sixty }}</p>
   {{/each }}
 
+  
+</template>
+
+<template name ="markets">
+  <h1>Markets</h1>
+  {{#each allMarkets }}
+    <div class="col-sm-3">
+      <h3>Currency : {{ currency }}, {{ symbol }}</h3>
+      <p>latest_trade : {{ latest_trade }}</p>
+      <p>bid : {{ bid }}</p>
+      <p>ask : {{ ask }}</p>
+      <p>avg : {{ avg }}</p>
+      
+      <p>close : {{ close }}</p>
+      <p>high : {{ high }}</p>
+      <p>low : {{ low }}</p>
+      <p>Currency Volume : {{ currency_volume }}</p>
+      <p>Volume : {{ volume }}</p>
+    </div>
+  {{/each }}
 
 </template>
