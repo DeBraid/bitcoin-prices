@@ -4,27 +4,27 @@
 
 <body>
   <div class="container">
+    {{> layout}}
+  </div>
+</body>
+
+<template name="layout">
+    
     <div class="row">
       <h1>Price API</h1>
     </div>
 
     <div class="row">
-      <div class="col-sm-4">
-        {{> showPrices }}
+      <div class="col-lg-9">
+        {{> global }}
+        {{> markets }}
       </div>
-      {{> global }}
+      <div class="col-lg-3">
+        {{> weighted }}
+      </div>
     </div>
 
-    <div class="row">
-      {{> markets }}
-    </div>
-
-    <div class="row">
-      {{> weighted }}
-    </div>
-
-  </div>
-</body>
+</template>
 
 <template name="showPrices">
   <h3>Showing prices, ma loooord...</h3>

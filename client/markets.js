@@ -8,6 +8,7 @@ Template.markets.helpers({
   allMarkets: function () {
     var quotes = Session.get("marketPrices"),
         data = [];
+        console.log(quotes);
 
     _.sortBy(quotes, function ( quote, i )  {
       var vol = quote.volume;
