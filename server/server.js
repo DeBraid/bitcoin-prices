@@ -6,6 +6,13 @@ Meteor.methods({
 });
 
 Meteor.methods({
+  getExchangeRates: function () {
+    var result = Meteor.http.call("GET", "http://openexchangerates.org/api/latest.json?app_id=13f51522da3d4c0988504c2a52194cda");
+    return result;
+  }  
+}); 
+
+Meteor.methods({
   getMarkets: function () {
     var result = Meteor.http.call("GET", "http://api.bitcoincharts.com/v1/markets.json");
     return JSON.parse(result.content);

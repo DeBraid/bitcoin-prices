@@ -14,6 +14,23 @@ Meteor.call("getPrice", function(error, result) {
   return Session.set("currentPrice", data);
 });
 
+Meteor.call("getExchangeRates", function(error, result) {
+  if (error)
+      console.log(error)
+  var exRates = result;
+  console.log(exRates.data.rates);
+
+  // var data = [
+  //   {
+  //     time : price.time_stamp,
+  //     coin : price.ticker.coin_name,
+  //     price : price.ticker.bnc_price_index_usd
+  //   }
+  // ];
+
+  // return Session.set("currentPrice", data);
+});
+
 Meteor.call("getCAD24Price", function(error, result) {
   if (error)
       console.log(error)
