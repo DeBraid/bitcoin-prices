@@ -24,9 +24,7 @@ Template.weighted.helpers({
         vsWk : vsWk,
         vsMth : vsMth 
       });
-
     })
-    console.log("data", data);
     return data;
   }
 });
