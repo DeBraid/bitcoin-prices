@@ -7,18 +7,26 @@ Meteor.call("getWeighted", function(error, result) {
 Template.weighted.helpers({
   weightedPrices: function () {
     var quotes = Session.get("weightedPrices"),
-      data = [];
+        data = [];
 
     _.each(quotes, function (quote, ticker) {
-  
+      var day = quote["24h"], 
+          wk = quote["7d"],  
+          mth = quote["30d"], 
+          vsWk = ((day - wk)/wk).toFixed(3),
+          vsMth = ((day - mth)/mth).toFixed(3);
+
       data.push({
         curr : ticker,
-        seven:  quote["7d"] , 
-        thirty: quote["30d"] , 
-        sixty:  quote["24h"], 
+        day : day, 
+        wk : wk, 
+        mth : mth,
+        vsWk : vsWk,
+        vsMth : vsMth 
       });
 
     })
+    console.log("data", data);
     return data;
   }
 });

@@ -93,9 +93,10 @@ Meteor.call("getPrice", function(error, result) {
   if (error)
       console.log(error)
   var price = result;
-  var tick1 = price.time_stamp;
-  ticks.push(tick1);
-  var tick0 = ticks[ticks.length - 1];
+  // console.log("price", price);
+  // var tick1 = price.time_stamp;
+  // ticks.push(tick1);
+  // var tick0 = ticks[ticks.length - 1];
 
   Meteor.startup(function () {
     Meteor.setInterval(function() {
