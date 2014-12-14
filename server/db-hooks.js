@@ -1,62 +1,35 @@
-// WeightedPrices = new Meteor.Collection('weighted_prices'); // server-side only
-
-// // In this case, "details" should be an object containing a date, plus required e-mail details (recipient, content, etc.)
-
-// function insertPrices( prices ) {
-
-//   WeightedPrices.insert({
-//     timestamp : prices.timestamp ,
-//     price : prices.btc
-//   });
-
-// }
+BitcoinPrices = new Meteor.Collection('bitcoin_prices'); 
 
 SyncedCron.start();
 
 SyncedCron.add({
-
-  name: "get Price",
-
+  name: "get Bitcoin Prices for DB",
   schedule: function(parser){
-    return parser.text('every 30 minutes');
+    return parser.text('every 5 minutes');
   },
-
   job: function(){
-    return Meteor.call("getWeightedPricesForDatabase");
+    return Meteor.call("getBitcoinPricesForDatabase");
   }
 });
 
+Meteor.methods({
+  getBitcoinPricesForDatabase: function () {
+    var result = Meteor.http.call("GET", "http://api.bravenewcoin.com/ticker/bnc_ticker_btc.json");
+    var data = result.data;
 
-// function addTask(id, details) {
+    BitcoinPrices.insert({
+      timestamp : data.time_stamp,
+      price : data.ticker.bnc_price_index_usd,
+      symbol : data.ticker.coin_id,
+      name : data.ticker.coin_name,
+      mkt_cap_24hr_pct : data.ticker.mkt_cap_24hr_pcnt,
+      mkt_cap_usd : data.ticker.mkt_cap_usd,
+      price_24hr_pct : data.ticker.price_24hr_pcnt,
+      total_supply : data.ticker.total_supply,
+      vol_24hr_pct : data.ticker.vol_24hr_pcnt,
+      volume_24hr_usd : data.ticker.volume_24hr_usd,
+    });
 
-//   SyncedCron.add({
-//     name: id,
-//     schedule: function(parser) {
-//       return parser.recur().on(details.date).fullDate();
-//     },
-//     job: function() {
-//       sendMail(details);
-//       FutureTasks.remove(id);
-//       SyncedCron.remove(id);
-//             return id;
-//     }
-//   });
-
-// }
-
-// function scheduleMail(details) { 
-
-//   if (details.date < new Date()) {
-//     sendMail(details);
-//   } else {
-//     var thisId = FutureTasks.insert(details);
-//     addTask(thisId, details);   
-//   }
-//   return true;
-
-// }
-// // Meteor.call("getWeighted", function(error, result) {
-// //   if (error)
-// //       console.log(error)
-// //   console.log(result);
-// // });
+    return data;
+  }  
+});

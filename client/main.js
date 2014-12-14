@@ -91,22 +91,12 @@ Meteor.call("getBTCCADPrice", function(error, result) {
 
 var ticks = [];
 
-Meteor.call("getPrice", function(error, result) {
-  if (error)
-      console.log(error)
-  var price = result;
-  // console.log("price", price);
-  // var tick1 = price.time_stamp;
-  // ticks.push(tick1);
-  // var tick0 = ticks[ticks.length - 1];
-
-  Meteor.startup(function () {
-    Meteor.setInterval(function() {
-     Prices.insert(price);
-    }, 1800000); //30min
-  });
-    
-
+Meteor.call("getWeightedPricesForDatabase", function (error, result) {
+  if (error) {
+    console.log("error in getWeightedPricesForDatabase", error);
+  }else{
+    console.log("getWeightedPricesForDatabase res", result);
+  }
 });
 
 Template.showPrices.helpers({

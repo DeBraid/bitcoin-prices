@@ -5,14 +5,6 @@ Meteor.methods({
   }  
 });
 
-Meteor.methods({
-  getWeightedPricesForDatabase: function () {
-    var result = Meteor.http.call("GET", "http://api.bitcoincharts.com/v1/weighted_prices.json");
-    return JSON.parse(result.content);
-  }  
-});
-
-
 
 Meteor.methods({
   getExchangeRates: function () {
