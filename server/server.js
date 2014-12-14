@@ -2,14 +2,12 @@ Meteor.publish('usdPrices', function() {
   return BitcoinPrices.find();
 });
 
-
 Meteor.methods({
   getWeighted: function () {
     var result = Meteor.http.call("GET", "http://api.bitcoincharts.com/v1/weighted_prices.json");
     return JSON.parse(result.content);
   }  
 });
-
 
 Meteor.methods({
   getExchangeRates: function () {
@@ -25,14 +23,12 @@ Meteor.methods({
   }  
 });
 
-
 Meteor.methods({
   getPrice: function () {
     var result = Meteor.http.call("GET", "http://api.bravenewcoin.com/ticker/bnc_ticker_btc.json");
     return result.data;
   }  
 });
-
 
 Meteor.methods({
   getBTCCADPrice: function () {
@@ -54,7 +50,6 @@ Meteor.methods({
     return result.data;
   }
 });
-
 
 Meteor.methods({
   getIndia: function () {

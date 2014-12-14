@@ -14,25 +14,6 @@ Meteor.call("getPrice", function(error, result) {
   return Session.set("currentPrice", data);
 });
 
-Meteor.call("getExchangeRates", function(error, result) {
-  if (error)
-      console.log(error)
-  var exRates = result,
-  rates = exRates.data.rates,
-  data = [];
-
-  _.object(_.map(rates, function (value, key) {
-    return data.push({curr: key, fxRate: value});
-  }));
-  return Session.set("globalFx", data);
-});
-
-Template.globalFx.helpers({
-  'globalFx': function () {
-    return Session.get("globalFx");
-  }
-})
-
 Meteor.call("getCAD24Price", function(error, result) {
   if (error)
       console.log(error)
@@ -106,41 +87,3 @@ Template.global.helpers({
     return Session.get("INR24");
   }
 }); 
-
-// Template.usd.helpers({
-//   usdPrices: function () {
-//     return Meteor.subscribe('usdPrices');
-//   }
-// });
-
-// UI.registerHelpers({
-//   weightedPrices: function () {
-//     var quotes = Session.get("weightedPrices"),
-//         data = [];
-
-//     _.each(quotes, function (quote, ticker) {
-//       var day = quote["24h"], 
-//           wk = quote["7d"],  
-//           mth = quote["30d"], 
-      
-//       if ( ticker == 'USD') {
-//         console.log("this ticker is", ticker);
-//         var usd = day;
-//         console.log(usd);
-
-        
-//       };
-
-
-//       data.push({
-//         curr : ticker,
-//         day : day, 
-//         wk : wk, 
-//         mth : mth,
-//         vsWk : vsWk,
-//         vsMth : vsMth 
-//       });
-//     })
-//     return data;
-//   }
-// });
