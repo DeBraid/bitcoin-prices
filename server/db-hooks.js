@@ -1,4 +1,4 @@
-BitcoinPrices = new Meteor.Collection('bitcoin_prices'); 
+// BitcoinPrices = new Meteor.Collection('bitcoin_prices'); 
 
 SyncedCron.start();
 
@@ -33,3 +33,4 @@ Meteor.methods({
     return data;
   }  
 });
+

@@ -19,11 +19,23 @@
         <!-- {{> global }}
         {{> markets }} -->
         <!-- {{> weighted }} -->
-        {{> globalFx }}
+        <!-- {{> globalFx }} -->
+        {{> usd }}
       </div>
       <div class="col-lg-3">
       </div>
     </div>
+
+</template>
+
+<template name="usd">
+  <h2>usd section</h2>
+
+  {{#each usdPrices }}
+    <h4>..."male"</h4>
+    {{price}}
+
+  {{/each}}
 
 </template>
 

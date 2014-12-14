@@ -89,16 +89,6 @@ Meteor.call("getBTCCADPrice", function(error, result) {
   var getBTCCADPrice = result;
 });
 
-var ticks = [];
-
-Meteor.call("getWeightedPricesForDatabase", function (error, result) {
-  if (error) {
-    console.log("error in getWeightedPricesForDatabase", error);
-  }else{
-    console.log("getWeightedPricesForDatabase res", result);
-  }
-});
-
 Template.showPrices.helpers({
   priceData: function () {
     return Session.get("currentPrice");
@@ -117,7 +107,11 @@ Template.global.helpers({
   }
 }); 
 
-
+// Template.usd.helpers({
+//   usdPrices: function () {
+//     return Meteor.subscribe('usdPrices');
+//   }
+// });
 
 // UI.registerHelpers({
 //   weightedPrices: function () {
