@@ -15,6 +15,7 @@ Template.weighted.helpers({
           mth = quote["30d"], 
           vsWk = ((day - wk)/wk).toFixed(3),
           vsMth = ((day - mth)/mth).toFixed(3);
+      
 
       data.push({
         curr : ticker,
