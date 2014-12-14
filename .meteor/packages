@@ -7,4 +7,5 @@ meteor-platform
 http
 mizzao:bootstrap-3
 underscore
+percolatestudio:synced-cron
 
