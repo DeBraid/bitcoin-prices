@@ -8,13 +8,12 @@ Router.configure({
 // Routes
 Router.map(function() {
   
-  // this.route('homepage', {
-  //     path: '/'
-  // });
-
   this.route('homepage', {
     path: '/',
-    template: 'usd',
+    yieldTemplates: {
+      'globalFx': {to: 'fx'},
+      'usd': {to: 'usdTemp'}
+    },
     waitOn: function () {
       return Meteor.subscribe('usdPrices');
     },
@@ -24,4 +23,6 @@ Router.map(function() {
       }
     }
   });
+
+
 });

@@ -4,25 +4,24 @@
 
 <body>
   <div class="container">
-    {{> layout}}
+    {{> yield}}
   </div>
 </body>
 
-<template name="layout">
+<template name="homepage">
     
     <div class="row">
-      <h1>Price API</h1>
+      <h1>Blockchain Financial</h1>
     </div>
 
     <div class="row">
       <div class="col-lg-9">
-        <!-- {{> global }}
-        {{> markets }} -->
-        <!-- {{> weighted }} -->
-        {{> globalFx }}
-        {{> usd }}
+        {{> global }}
+        {{> markets }}
+        {{> weighted }}
       </div>
       <div class="col-lg-3">
+        {{> usd }}
       </div>
     </div>
 
