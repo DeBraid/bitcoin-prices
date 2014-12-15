@@ -1,11 +1,9 @@
-// BitcoinPrices = new Meteor.Collection('bitcoin_prices'); 
-
 SyncedCron.start();
 
 SyncedCron.add({
-  name: "get Bitcoin Prices for DB",
+  name: "get hourly Bitcoin Prices for DB",
   schedule: function(parser){
-    return parser.text('every 5 minutes');
+    return parser.text('every 1 hour');
   },
   job: function(){
     return Meteor.call("getBitcoinPricesForDatabase");
@@ -34,3 +32,25 @@ Meteor.methods({
   }  
 });
 
+SyncedCron.add({
+  name: "btc 5 min",
+  schedule: function(parser){
+    return parser.text('every 5 minutes');
+  },
+  job: function(){
+    return Meteor.call("getBtc5minPrices");
+  }
+});
+
+Meteor.methods({
+  getBtc5minPrices: function () {
+    var result = Meteor.http.call("GET", "http://api.bravenewcoin.com/ticker/bnc_ticker_btc.json");
+    var data = result.data;
+
+    Btc5min.insert({
+      timestamp : data.time_stamp,
+      price : data.ticker.bnc_price_index_usd
+    });
+    return data;
+  }  
+});
