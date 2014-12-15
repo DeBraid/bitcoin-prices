@@ -35,7 +35,7 @@ Meteor.methods({
 SyncedCron.add({
   name: "btc 5 min",
   schedule: function(parser){
-    return parser.text('every 30 seconds');
+    return parser.text('every 5 minutes');
   },
   job: function(){
     return Meteor.call("getBtc5minPrices");
