@@ -26,11 +26,11 @@ Router.map(function() {
     path: '/charts',
     template: 'lineChart',
     waitOn: function () {
-      return Meteor.subscribe('usdPrices');
+      return Meteor.subscribe('btc5min');
     },
     data: function () {
       return {
-        usdPrices: BitcoinPrices.find()
+        btc5min: Btc5min.find()
       }
     }
   });

@@ -7,8 +7,10 @@ Meteor.call("getMarkets", function(error, result) {
 Template.markets.helpers({
   allMarkets: function () {
     var quotes = Session.get("marketPrices"),
-        data = [];
-        console.log(quotes);
+        data = [],
+        finalData = [],
+        tickers = ["AUD","BRL","CAD","CHF","CNY","EUR","GBP","IDR","ILS","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"];
+      
 
     _.sortBy(quotes, function ( quote, i )  {
       var vol = quote.volume;
@@ -16,6 +18,15 @@ Template.markets.helpers({
         return data.push(quote);
       };
     });
-    return data.reverse();
+    var currencies = data.reverse();
+
+    _.map(currencies, function ( curr, i ) {
+      var crr = curr.currency;
+      if ( _.contains(tickers, crr)) {
+        return finalData.push(curr);
+      };
+    })
+
+    return finalData;
   }
 }); 
