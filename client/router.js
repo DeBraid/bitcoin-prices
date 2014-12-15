@@ -12,8 +12,21 @@ Router.map(function() {
     path: '/',
     yieldTemplates: {
       'globalFx': {to: 'fx'},
-      'usd': {to: 'usdTemp'}
+      'usd': {to: 'chart'}
     },
+    waitOn: function () {
+      return Meteor.subscribe('usdPrices');
+    },
+    data: function () {
+      return {
+        usdPrices: BitcoinPrices.find()
+      }
+    }
+  });
+
+  this.route('charts', {
+    path: '/charts',
+    template: 'lineChart',
     waitOn: function () {
       return Meteor.subscribe('usdPrices');
     },
