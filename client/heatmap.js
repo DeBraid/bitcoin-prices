@@ -4,7 +4,7 @@ Template.heatmap.created = function () {
         console.log(error)
     var quotes = result,
         data = [];
-
+        
     _.each(quotes, function (quote, ticker) {
       var day = quote["24h"], 
           wk = quote["7d"],  
@@ -27,11 +27,21 @@ Template.heatmap.created = function () {
 }
 
 Template.heatmap.rendered = function () {
-  //     return {
-  //       day: +d.day,
-  //       hour: +d.hour,
-  //       value: +d.value
-  //     };
+//     {
+//       day: +d.FOOday,
+//       hour: +d.FOOhour,
+//       value: +d.FOOvalue
+//     };
+
+/* 
+data set: 
+  curr: "USD"
+  day: "258.13"
+  mth: "267.69"
+  vsMth: "-0.036"
+  vsWk: "-0.063"
+  wk: "275.48"
+*/
 
   // var data = Session.get("heatmapData"); 
   var dataset = Session.get("heatmapData");
@@ -51,11 +61,16 @@ Template.heatmap.rendered = function () {
       legendElementWidth = gridSize*2,
       buckets = 9,
       colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
-      days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-      times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
+      // days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+      periods = ["Week", "Month"];
+      // times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
+      // currencies = // dataset.map ( |x| x.curr );
+      var currencies = dataset.map(function (d,i) {
+        return d.curr;
+      });
 
       var colorScale = d3.scale.quantile()
-          .domain([0, buckets - 1, d3.max(dataset, function (d) { return d.value; })])
+          .domain([0, buckets - 1, d3.max(dataset, function (d) { return d.vsWk; })])
           .range(colors);
 
       var svg = d3.select("#chart").append("svg")
@@ -65,7 +80,7 @@ Template.heatmap.rendered = function () {
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       var dayLabels = svg.selectAll(".dayLabel")
-          .data(days)
+          .data(periods)
           .enter().append("text")
             .text(function (d) { return d; })
             .attr("x", 0)
@@ -75,7 +90,7 @@ Template.heatmap.rendered = function () {
             .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
 
       var timeLabels = svg.selectAll(".timeLabel")
-          .data(times)
+          .data(currencies)
           .enter().append("text")
             .text(function(d) { return d; })
             .attr("x", function(d, i) { return i * gridSize; })
@@ -87,8 +102,8 @@ Template.heatmap.rendered = function () {
       var heatMap = svg.selectAll(".hour")
           .data(dataset)
           .enter().append("rect")
-          .attr("x", function(d) { return (d.hour - 1) * gridSize; })
-          .attr("y", function(d) { return (d.day - 1) * gridSize; })
+          .attr("x", function(d) { return (d.vsWk - 1) * gridSize; })
+          .attr("y", function(d) { return (d.vsMth - 1) * gridSize; })
           .attr("rx", 4)
           .attr("ry", 4)
           .attr("class", "hour bordered")
@@ -97,9 +112,9 @@ Template.heatmap.rendered = function () {
           .style("fill", colors[0]);
 
       heatMap.transition().duration(1000)
-          .style("fill", function(d) { return colorScale(d.value); });
+          .style("fill", function(d) { return colorScale(d.vsWk); });
 
-      heatMap.append("title").text(function(d) { return d.value; });
+      heatMap.append("title").text(function(d) { return d.vsWk; });
           
       var legend = svg.selectAll(".legend")
           .data([0].concat(colorScale.quantiles()), function(d) { return d; })

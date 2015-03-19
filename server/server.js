@@ -1,7 +1,12 @@
 Meteor.methods({
   getWeighted: function () {
-    var result = Meteor.http.call("GET", "http://api.bitcoincharts.com/v1/weighted_prices.json");
-    return JSON.parse(result.content);
+    var result = Meteor.http.get("http://api.bitcoincharts.com/v1/weighted_prices.json");
+    console.log(result);
+    if ( result.statusCode === 200 ) {
+      return JSON.parse(result.content);
+    } else {
+      throw new Meteor.Error(500, "Call failed with error: "+result);
+    }
   }  
 });
 
