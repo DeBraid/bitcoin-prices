@@ -1,0 +1,16 @@
+<template name="heatmap">
+  <h1>heatmap</h1>
+  {{#each weightedPrices }}
+    {{> heatmapTest }}  
+  {{/each }}
+  <div id="chart"></div>
+</template>
+
+<template name="heatmapTest">
+  <div class="col-sm-3">
+    <h4>{{ curr }}</h4>
+    <p>Price: ${{ day }}</p>
+    <p>vs Weekly Avg: {{ vsWk }}%</p>
+    <p>vs Monthly Avg: {{ vsMth }}%</p>
+  </div>
+</template>

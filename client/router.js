@@ -34,4 +34,8 @@ Router.map(function() {
       }
     }
   });
+
+  this.route('heatmap', {
+    path: '/heatmap'
+  });
 });
